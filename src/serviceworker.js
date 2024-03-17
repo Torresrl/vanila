@@ -3,10 +3,14 @@ got a warning in the book that this should be in src foler, I wil try to have it
 to avoid making changes to server.
  */
 
-//alert('Service worker')
+const statickCatchName = 'staticfiles'
 
 addEventListener('install',  (event) => {
-    console.log('The service worker is installing...');
+    event.waitUntil(
+        caches.open(statickCatchName).then(statickCatch => {
+            statickCatch.addAll(['/helloWorld.js', '/main.css'])
+        })
+    )
 });
 addEventListener('activate', (event) => {
     console.log('The service worker is activated.');
@@ -14,13 +18,12 @@ addEventListener('activate', (event) => {
 addEventListener('fetch',  (event) => {
     const req = event.request
     event.respondWith(
-        fetch(req)
-            .then((responseFromFetch) => {
-            return responseFromFetch
+        caches.match(req).then((resCatch) => {
+            return resCatch || fetch(req)
         }).catch((error) => {
             return new Response('<h1>Oops!</h1> <p>Something went wrong.</p>', {
                 headers: {'Content-type': 'text/html; charset=utf-8'}
-            })
+            });
         })
     )
     console.log(req)
