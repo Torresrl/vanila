@@ -10,6 +10,7 @@ class StaticHandler(RequestHandler):
             '.js': 'text/javascript',
             '.css': 'text/css',
             '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
             '.png': 'image/png',
             'notFound': 'text/plain'
         }

@@ -4,5 +4,8 @@ routes = {
         },
     '/goodby': {
         'template': 'goodbye.html'
-    }
+    },
+    '/offline': {
+        'template': 'offline.html'
+    },
 }
