@@ -2,8 +2,8 @@
 got a warning in the book that this should be in src foler, I wil try to have it her,
 to avoid making changes to server.
  */
-
-const statickCatchName = 'staticfiles'
+const version = 'V0.01'
+const statickCatchName = 'staticfiles' + version
 
 addEventListener('install',  (event) => {
     event.waitUntil(
@@ -16,6 +16,21 @@ addEventListener('activate', (event) => {
     console.log('The service worker is activated.');
 });
 addEventListener('fetch',  (event) => {
+    event.waitUntil(() => {
+        caches.keys()
+            .then(caches => {
+                return Promise.all(
+                    caches.map(cacheName => {
+                        if (cacheName !== statickCatchName) {
+                            return caches.delete(cacheName)
+                        }
+                    })
+                )
+            }).then(() => {
+                return clients.claim();
+        })
+    })
+
     const req = event.request
     event.respondWith(
         caches.match(req).then((resCatch) => {
