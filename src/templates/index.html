@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/main.css">
     <script type="text/javascript" src="/helloWorld.js"></script>
+    <link rel="serviceworker" href="serviceworker.js">
 </head>
 <body>
     <div class="content">
@@ -14,3 +15,14 @@
     </div>
 </body>
 </html>
+
+
+<script>
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('serviceworker.js').then(() => {
+            console.log('registert serviceworker')
+        }).catch(() => {
+            console.log('Noe feil har skjedd, klarte ikke å registrere serviceworker')
+        })
+    }
+</script>

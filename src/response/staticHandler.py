@@ -22,7 +22,13 @@ class StaticHandler(RequestHandler):
         hund.jpg../response/xxx
         '''
         try:
-            if extension in (".jpg", ".jpeg", ".png"):
+            ''' 
+            Service worker needs to be in root file, beacuse it only works for the files it is defined in.
+            If we had service worker in public, it would only work for calls to: https://www.domain/public
+            '''
+            if split_path[0] == '/serviceworker' and extension == '.js':
+                self.contents = open(file_path.split('/')[1])
+            elif extension in (".jpg", ".jpeg", ".png"):
                 self.contents = open('public{}'.format(file_path), 'rb')
             else:
                 self.contents = open('public{}'.format(file_path), 'r')
