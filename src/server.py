@@ -1,4 +1,5 @@
 import os
+import json
 
 from http.server import BaseHTTPRequestHandler
 from routes.main import routes
@@ -12,7 +13,20 @@ class Server(BaseHTTPRequestHandler):
         return
 
     def do_POST(self):
-        return
+        content_len = int(self.headers.get('Content-Length'))
+        post_body = self.rfile.read(content_len)
+
+        response_data = {'message': 'Hei fra server'}
+
+        json_data = json.dumps(response_data)
+
+        print(content_len)
+        print(post_body)
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json_data.encode('utf-8'))
+
 
     def do_GET(self):
         split_path = os.path.splitext(self.path)
