@@ -1,4 +1,4 @@
-#!/Users/torres.lande/prosjekter/SWplayground/venv/bin/python
+#!/home/torres/projects/vanila/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
