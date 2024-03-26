@@ -1,0 +1,1 @@
+For å starte opp applikasjonen, bare start main.py filen. 
