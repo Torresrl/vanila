@@ -8,3 +8,9 @@ body{ background-color: dimgrey }
     align-content: center;
     flex-direction: column;
 }
+
+.customerForm {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
